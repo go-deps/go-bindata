@@ -10,7 +10,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -71,7 +70,7 @@ func inATestAsset() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "in/a/test.asset", size: 15, mode: os.FileMode(436), modTime: time.Unix(1692777313, 0)}
+	info := bindataFileInfo{name: "in/a/test.asset", size: 15, mode: os.FileMode(0664), modTime: time.Unix(1692777313, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -89,7 +88,7 @@ func inBTestAsset() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "in/b/test.asset", size: 15, mode: os.FileMode(436), modTime: time.Unix(1692777313, 0)}
+	info := bindataFileInfo{name: "in/b/test.asset", size: 15, mode: os.FileMode(0664), modTime: time.Unix(1692777313, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -107,7 +106,7 @@ func inCTestAsset() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "in/c/test.asset", size: 15, mode: os.FileMode(436), modTime: time.Unix(1692777313, 0)}
+	info := bindataFileInfo{name: "in/c/test.asset", size: 15, mode: os.FileMode(0664), modTime: time.Unix(1692777313, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -125,7 +124,7 @@ func inTestAsset() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "in/test.asset", size: 15, mode: os.FileMode(436), modTime: time.Unix(1692777313, 0)}
+	info := bindataFileInfo{name: "in/test.asset", size: 15, mode: os.FileMode(0664), modTime: time.Unix(1692777313, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -192,11 +191,13 @@ var _bindata = map[string]func() (*asset, error){
 // directory embedded in the file by go-bindata.
 // For example if you run go-bindata on data/... and data contains the
 // following hierarchy:
-//     data/
-//       foo.txt
-//       img/
-//         a.png
-//         b.png
+//
+//	data/
+//	  foo.txt
+//	  img/
+//	    a.png
+//	    b.png
+//
 // then AssetDir("data") would return []string{"foo.txt", "img"}
 // AssetDir("data/img") would return []string{"a.png", "b.png"}
 // AssetDir("foo.txt") and AssetDir("nonexistent") would return an error
@@ -257,7 +258,7 @@ func RestoreAsset(dir, name string) error {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(_filePath(dir, name), data, info.Mode())
+	err = os.WriteFile(_filePath(dir, name), data, info.Mode())
 	if err != nil {
 		return err
 	}

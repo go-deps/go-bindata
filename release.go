@@ -111,7 +111,6 @@ func header_compressed_nomemcopy(w io.Writer, c *Config) error {
 	"fmt"
 	"net/http"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -122,7 +121,6 @@ func header_compressed_nomemcopy(w io.Writer, c *Config) error {
 	"compress/gzip"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -166,7 +164,6 @@ func header_compressed_memcopy(w io.Writer, c *Config) error {
 	"fmt"
 	"net/http"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -177,7 +174,6 @@ func header_compressed_memcopy(w io.Writer, c *Config) error {
 	"compress/gzip"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -219,7 +215,6 @@ func header_uncompressed_nomemcopy(w io.Writer, c *Config) error {
 	"bytes"
 	"fmt"
 	"net/http"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -229,7 +224,6 @@ func header_uncompressed_nomemcopy(w io.Writer, c *Config) error {
 	} else {
 		header = `import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -264,7 +258,6 @@ func header_uncompressed_memcopy(w io.Writer, c *Config) error {
 	"bytes"
 	"fmt"
 	"net/http"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -272,7 +265,6 @@ func header_uncompressed_memcopy(w io.Writer, c *Config) error {
 	} else {
 		header = `import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -462,7 +454,7 @@ func asset_release_common(w io.Writer, c *Config, asset *Asset) error {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: %q, size: %d, mode: os.FileMode(%d), modTime: time.Unix(%d, 0)}
+	info := bindataFileInfo{name: %q, size: %d, mode: os.FileMode(%#o), modTime: time.Unix(%d, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }

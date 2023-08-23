@@ -13,7 +13,7 @@ output being generated.
 
 To install the library and command line program, use the following:
 
-	go get -u github.com/go-deps/go-bindata/...
+	go install github.com/go-deps/go-bindata/cmd/go-bindata@latest
 
 
 ### Usage

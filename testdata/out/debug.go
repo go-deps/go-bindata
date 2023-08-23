@@ -10,7 +10,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -19,9 +18,9 @@ import (
 
 // bindataRead reads the given file from disk. It returns an error on failure.
 func bindataRead(path, name string) ([]byte, error) {
-	buf, err := ioutil.ReadFile(path)
+	buf, err := os.ReadFile(path)
 	if err != nil {
-		err = fmt.Errorf("Error reading asset %s at %s: %v", name, path, err)
+		err = fmt.Errorf("error reading asset %s at %s: %v", name, path, err)
 	}
 	return buf, err
 }
@@ -79,7 +78,7 @@ func inATestAsset() (*asset, error) {
 
 	fi, err := os.Stat(path)
 	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+		err = fmt.Errorf("error reading asset info %s at %s: %v", name, path, err)
 	}
 
 	a := &asset{bytes: bytes, info: fi}
@@ -97,7 +96,7 @@ func inBTestAsset() (*asset, error) {
 
 	fi, err := os.Stat(path)
 	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+		err = fmt.Errorf("error reading asset info %s at %s: %v", name, path, err)
 	}
 
 	a := &asset{bytes: bytes, info: fi}
@@ -115,7 +114,7 @@ func inCTestAsset() (*asset, error) {
 
 	fi, err := os.Stat(path)
 	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+		err = fmt.Errorf("error reading asset info %s at %s: %v", name, path, err)
 	}
 
 	a := &asset{bytes: bytes, info: fi}
@@ -133,7 +132,7 @@ func inTestAsset() (*asset, error) {
 
 	fi, err := os.Stat(path)
 	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+		err = fmt.Errorf("error reading asset info %s at %s: %v", name, path, err)
 	}
 
 	a := &asset{bytes: bytes, info: fi}
@@ -202,11 +201,13 @@ var _bindata = map[string]func() (*asset, error){
 // directory embedded in the file by go-bindata.
 // For example if you run go-bindata on data/... and data contains the
 // following hierarchy:
-//     data/
-//       foo.txt
-//       img/
-//         a.png
-//         b.png
+//
+//	data/
+//	  foo.txt
+//	  img/
+//	    a.png
+//	    b.png
+//
 // then AssetDir("data") would return []string{"foo.txt", "img"}
 // AssetDir("data/img") would return []string{"a.png", "b.png"}
 // AssetDir("foo.txt") and AssetDir("nonexistent") would return an error
@@ -267,7 +268,7 @@ func RestoreAsset(dir, name string) error {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(_filePath(dir, name), data, info.Mode())
+	err = os.WriteFile(_filePath(dir, name), data, info.Mode())
 	if err != nil {
 		return err
 	}

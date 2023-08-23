@@ -41,7 +41,6 @@ func writeDebugHeader(w io.Writer, c *Config) error {
 	"bytes"
 	"net/http"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -49,7 +48,6 @@ func writeDebugHeader(w io.Writer, c *Config) error {
 	} else {
 		header = `import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -61,9 +59,9 @@ func writeDebugHeader(w io.Writer, c *Config) error {
 
 // bindataRead reads the given file from disk. It returns an error on failure.
 func bindataRead(path, name string) ([]byte, error) {
-	buf, err := ioutil.ReadFile(path)
+	buf, err := os.ReadFile(path)
 	if err != nil {
-		err = fmt.Errorf("Error reading asset %%s at %%s: %%v", name, path, err)
+		err = fmt.Errorf("error reading asset %%s at %%s: %%v", name, path, err)
 	}
 	return buf, err
 }
@@ -134,7 +132,7 @@ func %s() (*asset, error) {
 
 	fi, err := os.Stat(path)
 	if err != nil {
-		err = fmt.Errorf("Error reading asset info %%s at %%s: %%v", name, path, err)
+		err = fmt.Errorf("error reading asset info %%s at %%s: %%v", name, path, err)
 	}
 
 	a := &asset{bytes: bytes, info: fi}
