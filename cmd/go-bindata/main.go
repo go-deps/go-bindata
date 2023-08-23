@@ -12,7 +12,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/go-bindata/go-bindata/v3"
+	"github.com/go-deps/go-bindata"
 )
 
 func main() {
@@ -89,9 +89,9 @@ func parseArgs() *bindata.Config {
 // parseRecursive determines whether the given path has a recursive indicator and
 // returns a new path with the recursive indicator chopped off if it does.
 //
-//  ex:
-//      /path/to/foo/...    -> (/path/to/foo, true)
-//      /path/to/bar        -> (/path/to/bar, false)
+//	ex:
+//	    /path/to/foo/...    -> (/path/to/foo, true)
+//	    /path/to/bar        -> (/path/to/bar, false)
 func parseInput(path string) bindata.InputConfig {
 	if strings.HasSuffix(path, "/...") {
 		return bindata.InputConfig{
