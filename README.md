@@ -1,3 +1,5 @@
+[![Go](https://github.com/go-deps/go-bindata/actions/workflows/go.yml/badge.svg)](https://github.com/go-deps/go-bindata/actions/workflows/go.yml)
+
 ## bindata
 
 This package converts any file into manageable Go source code. Useful for
